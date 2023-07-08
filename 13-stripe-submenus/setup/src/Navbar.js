@@ -1,9 +1,25 @@
-import React from 'react'
-import logo from './images/logo.svg'
-import { FaBars } from 'react-icons/fa'
+import React from "react";
+import logo from "./images/logo.svg";
+import { FaBars } from "react-icons/fa";
+import { useGlobalContext } from "./context";
+import Navlinks from "./Navlinks";
 
 const Navbar = () => {
-  return <h2>navbar component</h2>
-}
+  const { openSidebar, setPageId } = useGlobalContext();
+  const handleSubmenu = (e) => {
+    if (!e.target.classList.contains("nav-link")) setPageId(null);
+  };
+  return (
+    <nav onMouseOver={handleSubmenu}>
+      <div className="nav-center">
+        <h3 className="logo">strapi</h3>
+        <button className="toggle-btn" onClick={openSidebar}>
+          <FaBars />
+        </button>
+        <Navlinks />
+      </div>
+    </nav>
+  );
+};
 
-export default Navbar
+export default Navbar;
